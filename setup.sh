@@ -70,7 +70,7 @@ function create_python_venv() {
             error "Failed to install requirements"
         }
     else
-        error "No 'requirements.txt' file found, so not installing any dependencies"
+        warn "No 'requirements.txt' file found, so not installing any dependencies"
     fi
 
     log "Using Python: $(command -v python)"
