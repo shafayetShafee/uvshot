@@ -95,7 +95,10 @@ function create_dot_env() {
 create_dot_env && {
     if [ -f "$DOT_ENV_FILE" ]
         then
-        export $(xargs < "$DOT_ENV_FILE")
+        set -a
+        # shellcheck disable=SC1090
+        source "$DOT_ENV_FILE"
+        set +a
         log "Exported below mentioned environment variables.\n\n$(cat "$DOT_ENV_FILE")"
     else
         error "Failed to export environment variables. $DOT_ENV_FILE file does not exist."
