@@ -10,17 +10,22 @@ DOT_ENV_FILE=$ROOT_PROJECT_DIR/.ushot-env
 UV_PYTHON_INSTALL_DIR=$ROOT_PROJECT_DIR/python
 UV_CACHE_DIR=$ROOT_PROJECT_DIR/uv-cache
 
+
 log() {
-    printf "\033[0;32m%s INFO %s\033[0m\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
+    printf "%s INFO %s\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
 }
 
 warn() {
-    printf "\033[0;33m%s WARNING %s\033[0m\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
+    printf "%s \033[0;33mWARNING %s\033[0m\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
 }
 
 error() {
-    printf "\033[0;31m%s ERROR %s\033[0m\n"   "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
+    printf "%s \033[0;31mERROR %s\033[0m\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
     exit 1
+}
+
+log_success() {
+    printf "%s \033[0;32mINFO %s\033[0m\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
 }
 
 create_python_venv() {
@@ -44,7 +49,7 @@ create_python_venv() {
                         --install-dir "$UV_PYTHON_INSTALL_DIR" || {
             error "Failed to install Python $VENV_PYTHON_VERSION using uv"
         }
-        log "Python $VENV_PYTHON_VERSION installed successfully"
+        log_success "Python $VENV_PYTHON_VERSION installed successfully"
     fi
 
     if [ -d "$ROOT_PROJECT_DIR/venv" ]; then
@@ -56,7 +61,7 @@ create_python_venv() {
                      --managed-python || {
             error "Failed to create virtual environment"
         }
-        log "Virtual environment created"
+        log_success "Virtual environment created"
     fi
 
     log "Activating virtual environmentfor os:$OSTYPE"
@@ -71,7 +76,7 @@ create_python_venv() {
     fi
 
 
-    log "Virtual environment activated successfully, now installing requirements..."
+    log_success "Virtual environment activated successfully, now installing requirements..."
     if [[ -f "requirements.txt" ]]; then
         uv pip install -r requirements.txt --color auto && 
         log "Requirements installed successfully" || {
@@ -113,4 +118,4 @@ create_dot_env && {
     fi
 } &&
 create_python_venv &&
-log "Congratulations, setup process completed."
+log_success "Congratulations, setup process completed."
