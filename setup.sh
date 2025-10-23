@@ -12,7 +12,7 @@ UV_CACHE_DIR=$ROOT_PROJECT_DIR/uv-cache
 
 
 log() {
-    printf "%s INFO %s\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
+    printf "%s \033[2;37mINFO %s\033[0m\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
 }
 
 warn() {
@@ -112,7 +112,10 @@ create_dot_env && {
         # shellcheck disable=SC1090
         source "$DOT_ENV_FILE"
         set +a
-        log "Exported below mentioned environment variables.\n\n$(cat "$DOT_ENV_FILE")"
+        log "Exported below mentioned environment variables:"
+        echo
+        cat "$DOT_ENV_FILE"
+        echo 
     else
         error "Failed to export environment variables. $DOT_ENV_FILE file does not exist."
     fi
