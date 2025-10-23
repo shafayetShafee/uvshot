@@ -3,9 +3,7 @@
 `uvshot` is a simple, fast script to set up and manage Python virtual environments 
 using [`uv`](https://docs.astral.sh/uv/) in a isolated state. It’s ideal for teams who want a consistent, no-fuss environment setup in their projects.
 
-## 🧩 Prerequisites
-
-- Must have [`uv`](https://docs.astral.sh/uv/getting-started/installation/) installed on your system.
+**CAUTION: The shell scripts are only tested work in MacOS within zsh**
 
 ## 🚀 Installation & Usage
 
@@ -14,8 +12,8 @@ using [`uv`](https://docs.astral.sh/uv/) in a isolated state. It’s ideal for t
 Run the following commands from your project directory to download both setup and cleanup scripts:
 
 ```bash
-curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.0/setup.sh -o setup.sh
-curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.0/remove-python.sh -o remove-python.sh
+curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.1/setup.sh -o setup.sh
+curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.1/remove-python.sh -o remove-python.sh
 ```
 
 ### 2️⃣ Inspect before use
@@ -61,3 +59,36 @@ This will:
 After completion, you’ll see a success message confirming setup.
 
 
+### 4️⃣ Clean up
+
+To remove all managed Python installations and cached data created by `uvshot`:
+
+```bash
+source remove-python.sh
+```
+
+This will safely delete:
+
+- Installed Python versions under your project’s `python` directory
+- The `uv-cache` directory
+- The `.uvshot-env` file created by `setup.sh`
+
+## 💡 Notes
+
+- ✅ Works on Linux and macOS (POSIX-compliant shells such as bash or zsh)
+- ⚠️ Not compatible with Windows cmd.exe or PowerShell — use WSL instead
+- 🔍 Always inspect shell scripts before sourcing them in your environment
+
+
+## 🏷️ Versioning
+
+Releases are tagged on GitHub. You can use a specific version tag in the download URL for stability, for example:
+
+```bash
+curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.0/setup.sh -o setup.sh
+```
+
+---
+
+**Author:** [Shafayet Khan Shafee](https://github.com/shafayetShafee)  
+**License:** [MIT](./LICENSE)
