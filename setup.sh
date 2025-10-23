@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 VENV_PYTHON_VERSION=${1:-"3.9.6"}
 
@@ -10,21 +10,20 @@ DOT_ENV_FILE=$ROOT_PROJECT_DIR/.ushot-env
 UV_PYTHON_INSTALL_DIR=$ROOT_PROJECT_DIR/python
 UV_CACHE_DIR=$ROOT_PROJECT_DIR/uv-cache
 
-function log() {
-    echo -e "$(date +"%Y-%m-%d T%H:%M:%S%z") INFO $@"
+log() {
+    printf "\033[0;32m%s INFO %s\033[0m\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
 }
 
-function warn() {
-    echo -e "$(date +"%Y-%m-%d T%H:%M:%S%z") WARNING $@"
+warn() {
+    printf "\033[0;33m%s WARNING %s\033[0m\n" "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
 }
 
-function error() {
-    echo -e "$(date +"%Y-%m-%d T%H:%M:%S%z") ERROR $@"
+error() {
+    printf "\033[0;31m%s ERROR %s\033[0m\n"   "$(date +"%Y-%m-%dT%H:%M:%S%z")" "$*"
     exit 1
 }
 
-
-function create_python_venv() {
+create_python_venv() {
     log "Checking whether uv is installed or not"
     if command -v uv >/dev/null 2>&1; then
         log "uv is installed"
@@ -60,8 +59,17 @@ function create_python_venv() {
         log "Virtual environment created"
     fi
 
-    log "Activating virtual environment"
-    source venv/bin/activate
+    log "Activating virtual environmentfor os:$OSTYPE"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        source venv/bin/activate
+    elif [[ "$OSTYPE" == "cygwin"* ]]; then
+        source venv/Scripts/activate
+    elif [[ "$OSTYPE" == "msys"* ]]; then
+        source venv/Scripts/activate
+    else
+        source venv/bin/activate
+    fi
+
 
     log "Virtual environment activated successfully, now installing requirements..."
     if [[ -f "requirements.txt" ]]; then
@@ -77,7 +85,7 @@ function create_python_venv() {
 }
 
 
-function create_dot_env() {
+create_dot_env() {
   if [ -f "$DOT_ENV_FILE" ]
     then
       warn "$DOT_ENV_FILE file already exists."
