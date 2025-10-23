@@ -1,32 +1,67 @@
 # uvshot
 
-`uvshot` is a simple, fast script to set up and manage Python virtual environments using `uv`.
+`uvshot` is a simple, fast script to set up and manage Python virtual environments 
+using [`uv`](https://docs.astral.sh/uv/) in a isolated state. It’s ideal for teams who want a consistent, no-fuss environment setup in their projects.
 
 ---
 
-## Prerequisites
+## 🧩 Prerequisites
 
-- [uv](https://docs.astral.sh/uv/getting-started/installation/) must be installed on your system.
+- Must have [`uv`](https://docs.astral.sh/uv/getting-started/installation/) installed on your system.
 
 ---
 
-## Installation & Usage
+## 🚀 Installation & Usage
 
-1. Download the setup script in your project directory with `curl`
+### 1️⃣ Download the scripts
 
-    ```bash
-    curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/main/setup.sh -o setup.sh
-    ```
+Run the following commands from your project directory to download both setup and cleanup scripts:
 
-2. Inspect the sciprt before using.
+```bash
+curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.0/setup.sh -o setup.sh
+curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.0/remove-python.sh -o remove-python.sh
+```
 
-3. if seems trustable, then run `source setup.sh` from your project directory.
+### 2️⃣ Inspect before use
 
-4. Or you can download all the repo contents,
+Always review the downloaded scripts to ensure you trust the content:
 
-   ```bash
-    curl -L https://github.com/shafayetShafee/uvshot/archive/refs/heads/main.zip -o uvshot.zip && \
-    unzip uvshot.zip && \
-    mv uvshot-main/* . && \
-    rm -rf uvshot-main uvshot.zip
-   ```
+```bash
+less setup.sh
+```
+
+### 3️⃣ Run the setup script
+
+To create and activate a Python virtual environment (default version: 3.9.6):
+
+```bash
+source setup.sh
+```
+
+Or specify a Python version explicitly, for example:
+
+```bash
+source setup.sh 3.11.6
+# or
+# source setup.sh 3.13
+```
+
+This will:
+
+- Create a `.uvshot-env` file with project-specific paths. This dotenv 
+  contains the environment variable and value pair used by `uv` to manage
+  python download and venv creation.
+
+  **WARNING: If your project directory already contains a `.uvshot-env` dotenv
+  file, running `setup.sh` will overwrite the existing dotenv file.**
+
+- Download python version 3.11.6 in a directory `./python` within your project directory
+  using `uv`.
+
+- Create a virtual environment in `./venv` directory.
+
+- Install dependencies from requirements.txt (if present).
+
+After completion, you’ll see a success message confirming setup.
+
+
