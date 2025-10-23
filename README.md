@@ -3,13 +3,9 @@
 `uvshot` is a simple, fast script to set up and manage Python virtual environments 
 using [`uv`](https://docs.astral.sh/uv/) in a isolated state. It’s ideal for teams who want a consistent, no-fuss environment setup in their projects.
 
----
-
 ## 🧩 Prerequisites
 
 - Must have [`uv`](https://docs.astral.sh/uv/getting-started/installation/) installed on your system.
-
----
 
 ## 🚀 Installation & Usage
 
