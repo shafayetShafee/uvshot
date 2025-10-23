@@ -25,8 +25,8 @@ Before using `uvshot`, ensure your system meets the following requirements:
 Run the following commands from your project directory to download both setup and cleanup scripts:
 
 ```bash
-curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.1/setup.sh -o setup.sh
-curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.1/remove-python.sh -o remove-python.sh
+curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.2/setup.sh -o setup.sh
+curl -L https://raw.githubusercontent.com/shafayetShafee/uvshot/v1.0.2/remove-python.sh -o remove-python.sh
 ```
 
 ### 2️⃣ Inspect before use
