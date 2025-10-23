@@ -3,7 +3,20 @@
 `uvshot` is a simple, fast script to set up and manage Python virtual environments 
 using [`uv`](https://docs.astral.sh/uv/) in a isolated state. It’s ideal for teams who want a consistent, no-fuss environment setup in their projects.
 
-**CAUTION: The shell scripts are only tested work in MacOS within zsh**
+## 📋 Prerequisites
+
+Before using `uvshot`, ensure your system meets the following requirements:
+
+1. **Bash shell**  
+   - The scripts require Bash (tested on macOS Bash 3.2+ and Linux Bash 4+).  
+   - POSIX-compliant shells like `sh` may work with modifications, but Bash is recommended.
+
+2. **`uv` CLI tool**  
+   - [`uv`](https://docs.astral.sh/uv/) must be installed and available in your `$PATH`.  
+   - This script uses `uv` to download Python, create virtual environments, and install dependencies.
+
+> ⚠️ `uvshot` is **not compatible with Windows cmd.exe or PowerShell**. Use WSL if running on Windows.
+
 
 ## 🚀 Installation & Usage
 
